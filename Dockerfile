@@ -1,6 +1,6 @@
 FROM php:7.4-apache
 
-EXPOSE 80
+# EXPOSE 80
 WORKDIR /app
 
 # git, unzip & zip
@@ -19,7 +19,7 @@ COPY conf/php.ini /usr/local/etc/php/conf.d/app.ini
 # Apache
 COPY conf/vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY conf/apache.conf /etc/apache2/conf-available/z-app.conf
-COPY app/ /app/
+# COPY app/ /app/
 RUN a2enconf z-app
 
 RUN a2enmod rewrite remoteip && \

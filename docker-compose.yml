@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+  app:
+      image: evanng1/ezweb
+      container_name: ezweb
+      restart: always
+      volumes:
+        - ./app:/app
+      ports:
+        - 8080:80
