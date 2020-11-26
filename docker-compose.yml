@@ -2,13 +2,30 @@ version: '3.0'
 
 services:
   app:
-      image: evanng1/ezweb
-      container_name: ezweb
-      restart: always
-      volumes:
-        - ./conf/php.ini:/usr/local/etc/php/conf.d/app.ini
-        - ./conf/apache.conf:/etc/apache2/conf-available/z-app.conf
-        - ./conf/vhost.conf:/etc/apache2/sites-available/000-default.conf
-        - ./app:/app
-      ports:
-        - 8080:80
+    image: evanng1/ezweb
+    container_name: ezweb_app
+    restart: always
+    volumes:
+      - ./conf/php.ini:/usr/local/etc/php/conf.d/app.ini
+      - ./conf/apache.conf:/etc/apache2/conf-available/z-app.conf
+      - ./conf/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - ./app:/app
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+  
+  db:
+    image: mariadb
+    container_name: ezweb_db
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: changeme
+
+  # adminer:
+  #   image: adminer
+  #   container_name: ezweb_adminer
+  #   restart: always
+  #   ports:
+  #     - 8090:8080
+    
